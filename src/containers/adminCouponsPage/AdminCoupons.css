@@ -1,0 +1,13 @@
+.AddCouponBTN {
+    display: flex;
+    justify-content: end;
+
+}
+.AddCouponBTN:active {
+    transform: translateY(4px);;
+}
+.AddCouponContent {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}

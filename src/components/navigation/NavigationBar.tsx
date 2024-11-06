@@ -3,8 +3,17 @@ import "./NavigationBar.css";
 import AccountIcon from "@mui/icons-material/AccountCircle";
 import TicketIcon from "@mui/icons-material/ConfirmationNumber";
 import CoupinLogo from "../../assets/CouponLogo.png";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { MouseEventHandler } from "react";
 
-export default function NavigationBar() {
+interface Login {
+  isLogin: boolean;
+  onLogout: MouseEventHandler<HTMLAnchorElement> | undefined;
+}
+
+export default function NavigationBar({ isLogin, onLogout }: Login) {
+  console.log(isLogin);
   return (
     <div className="NavigationBarContainer">
       <img className="Logo" src={CoupinLogo} alt="Logo" />
@@ -12,9 +21,20 @@ export default function NavigationBar() {
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
-        <a className="NavigationBarItem" href={"/adminCoupons"}>
-          {<AccountIcon />}
-        </a>
+        {isLogin ? (
+          <a className="NavigationBarItem" href={"/adminCoupons"}>
+            {<AccountIcon />}
+          </a>
+        ) : null}
+        {!isLogin ? (
+          <a href="/login">
+            <LoginIcon />
+          </a>
+        ) : (
+          <a onClick={onLogout}>
+            <LogoutIcon />
+          </a>
+        )}
       </div>
     </div>
   );

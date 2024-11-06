@@ -29,6 +29,9 @@ export default function CouponsValidatoer() {
             "& .MuiInputLabel-root.Mui-focused": {
               color: "#bdc0f8", // Label color when focused
             },
+            "& .MuiOutlinedInput-input": {
+              color: "#bdc0f8", // Text color inside the input field
+            },
           }}
         />
         <Button

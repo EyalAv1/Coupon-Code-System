@@ -1,0 +1,23 @@
+.CouponItem{
+    border: 1px solid rgb(221, 160, 221);
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 1rem;
+}
+
+.EditIconContainer{
+    display: flex;
+    justify-content: end;
+}
+
+.EditIconContent{
+    position: fixed;
+}
+
+.EditIconContent:hover {
+    cursor: pointer;
+    color:rgb(149, 88, 149);
+}

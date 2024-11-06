@@ -2,6 +2,7 @@
     width: 100%;
     display: inline-flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .NavigationBarOutline {

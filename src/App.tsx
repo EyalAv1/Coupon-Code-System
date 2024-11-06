@@ -1,12 +1,18 @@
-// import { useState } from 'react'
 import "./App.css";
-import CouponsValidatoer from "./components/userCouponsValidator/CouponsValidator";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./containers/mainPage/MainPage";
+import AdminCoupons from "./containers/adminCouponsPage/AdminCoupons";
 
 function App() {
   return (
     <>
-      <div>check your coupons fast and easily</div>
-      <CouponsValidatoer />
+      <div> Navigation PlaceHolder</div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/adminCoupons" element={<AdminCoupons />} />
+        </Routes>
+      </Router>
     </>
   );
 }

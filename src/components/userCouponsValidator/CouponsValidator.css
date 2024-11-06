@@ -1,0 +1,8 @@
+.TextField {
+    padding-right: 5px;
+}
+
+.Form {
+    display: flex;
+    justify-content: center;
+}

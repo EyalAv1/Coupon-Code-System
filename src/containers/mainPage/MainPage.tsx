@@ -4,7 +4,10 @@ import "./MainPage.css";
 export default function MainPage() {
   return (
     <div>
-      <p>Coupons codes system - Main Page</p>
+      <p>
+        Wondering how much discount this coupon gives you <br /> Enter your
+        coupon below and find out how much discount you deserve
+      </p>
       <CouponsValidatoer />
     </div>
   );

@@ -1,0 +1,21 @@
+.NavigationBarContainer {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.NavigationBarOutline {
+    display: flex;
+    text-decoration: none;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.NavigationBarItem {
+    padding-right: 5px;
+}
+
+.Logo {
+    width: 65px;
+    height: 55px;
+}

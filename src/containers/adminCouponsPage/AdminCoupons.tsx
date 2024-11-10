@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./AdminCoupons.css";
 import AddIcon from "@mui/icons-material/AddCircle";
-import CouponCardItem from "../../components/couponCard/CouponCardItem";
 
 export default function AdminCoupons() {
   const [coupons, setCoupons] = useState([]);

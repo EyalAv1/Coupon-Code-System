@@ -1,10 +1,32 @@
 {
   "coupons": [
-    { "code": "DISCOUNT10", "description": "10% off", "discount": 10, "createdBy": "admin" },
-    { "code": "SAVE20", "description": "20% off", "discount": 20, "createdBy": "admin" }
+    {
+      "id": 1,
+      "code": "DISCOUNT50",
+      "discount": 50,
+      "expirationDate": "2024-12-31",
+      "used": false
+    },
+    {
+      "id": 2,
+      "code": "WELCOME10",
+      "discount": 10,
+      "expirationDate": "2024-11-30",
+      "used": false
+    }
   ],
-
-  "users" : [
-    {"email": "e@gmail.com", "password": "1234", "companyName": "asos"}
+  "users": [
+    {
+      "id": 1,
+      "companyName": "Asos",
+      "email": "john.doe@example.com",
+      "password":"1234"
+    },
+    {
+      "id": 2,
+      "companyName": "Nike",
+      "email": "jane.smith@example.com",
+      "password": "1234"
+    }
   ]
 }

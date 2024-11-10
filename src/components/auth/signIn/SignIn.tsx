@@ -6,21 +6,23 @@ interface SignIn {
 }
 
 export default function SignIn() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const onLoginClicked = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5292/Users/IsUserValid",
+        "http://localhost:5292/api/Users/IsUserValid",
         {
-          params: { username: username, password: password },
+          params: { email: email, password: password },
         }
       );
-      const token = response.data.Token;
+      const token = response.data.token;
+      console.log(token);
       localStorage.setItem("UserToken", token);
     } catch (err) {
+      console.log(err);
       setError("Invalid username or pasword");
     }
   };
@@ -29,8 +31,8 @@ export default function SignIn() {
       <div>{error != "" ? error : null}</div>
       <div>Sign In</div>
       <form>
-        <label>Username</label>
-        <input type="text" onChange={(e) => setUsername(e.target.value)} />
+        <label>Email</label>
+        <input type="text" onChange={(e) => setEmail(e.target.value)} />
         <label>Password</label>
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
         <input type="button" value="Login" onClick={onLoginClicked} />

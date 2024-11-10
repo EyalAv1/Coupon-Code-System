@@ -18,11 +18,11 @@ export default function AdminCoupons() {
   return (
     <div>
       <div className="AddCouponBTN">
-        <button onClick={addCoupon}>
+        {/* <button onClick={addCoupon}>
           <div className="AddCouponContent">
             <AddIcon /> Add Coupon
           </div>
-        </button>
+        </button> */}
       </div>
       <div>
         {coupons.length != 0

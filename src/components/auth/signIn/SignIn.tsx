@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUser } from "../../../services/AuthService";
+import { UserContext } from "../../../Context/userContext";
 
 export default function SignIn() {
   const navigate = useNavigate();
+
+  const { setToken } = useContext(UserContext)!;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +18,8 @@ export default function SignIn() {
         if (!res) {
           throw new Error("Invalid Email or Password");
         }
-        localStorage.setItem("UserToken", res.data.token);
+        localStorage.setItem("UserToken", res.token);
+        setToken(res.token);
         navigate("/");
       })
       .catch((err) => {

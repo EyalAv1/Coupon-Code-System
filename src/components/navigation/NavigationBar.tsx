@@ -5,15 +5,20 @@ import TicketIcon from "@mui/icons-material/ConfirmationNumber";
 import CoupinLogo from "../../assets/CouponLogo.png";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { MouseEventHandler } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../Context/userContext";
+import { useNavigate } from "react-router-dom";
 
-interface Login {
-  isLogin: boolean;
-  onLogout: MouseEventHandler<HTMLAnchorElement> | undefined;
-}
+export default function NavigationBar() {
+  const navigate = useNavigate();
 
-export default function NavigationBar({ isLogin, onLogout }: Login) {
-  console.log(isLogin);
+  const { token, setToken } = useContext(UserContext)!;
+
+  const logOut = () => {
+    setToken(null);
+    localStorage.setItem("UserToken", null!);
+    navigate("/");
+  };
   return (
     <div className="NavigationBarContainer">
       <img className="Logo" src={CoupinLogo} alt="Logo" />
@@ -26,7 +31,7 @@ export default function NavigationBar({ isLogin, onLogout }: Login) {
             {<AccountIcon />}
           </a>
         ) : null} */}
-        {!isLogin ? (
+        {!token ? (
           <a href="/login">
             <LoginIcon />
           </a>
@@ -35,7 +40,7 @@ export default function NavigationBar({ isLogin, onLogout }: Login) {
             <a className="NavigationBarItem" href={"/adminCoupons"}>
               {<AccountIcon />}
             </a>
-            <a onClick={onLogout}>
+            <a onClick={logOut}>
               <LogoutIcon />
             </a>
           </div>

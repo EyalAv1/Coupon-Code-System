@@ -11,21 +11,21 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  const handleLoginSuccess = () => {setIsLogin(true)};
+  const handleLoginSuccess = () => {
+    setIsLogin(true);
+  };
   const handleLogout = () => setIsLogin(false);
   return (
     <>
-      <NavigationBar isLogin = {isLogin} onLogout = {handleLogout}/>
-      <Router>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/adminCoupons" element={<AdminCoupons />} />
-          <Route
-            path="/Login"
-            element={<Login onLoginSuccess={handleLoginSuccess} />}
-          />
-        </Routes>
-      </Router>
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/adminCoupons" element={<AdminCoupons />} />
+        <Route
+          path="/Login"
+          element={<Login onLoginSuccess={handleLoginSuccess} />}
+        />
+      </Routes>
       <ToastContainer />
     </>
   );

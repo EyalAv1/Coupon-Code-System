@@ -2,8 +2,7 @@ import { useState } from "react";
 import "./Login.css";
 import SignIn from "../../components/auth/signIn/SignIn";
 import SignUp from "../../components/auth/signUp/SignUp";
-import axios from "axios";
-// import axios from "axios";
+
 interface LoginProps {
   onLoginSuccess: () => void; // The function that will be called on successful login
 }

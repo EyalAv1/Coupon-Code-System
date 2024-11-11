@@ -25,3 +25,17 @@ export const getCouponByName = async (couponCode: string) => {
     return null;
   }
 };
+
+export const getAllCouponsByUserId = async (userId: number) => {
+  try {
+    const data = await fetch(api + `CouponsByUser?userId=${userId}`, {
+      method: "POST",
+    });
+    if (!data.ok) {
+      throw new Error("User Not Found");
+    }
+    return data.json();
+  } catch (err) {
+    return null;
+  }
+};

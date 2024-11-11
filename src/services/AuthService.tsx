@@ -16,3 +16,21 @@ export const loginUser = async (email: string, password: string) => {
     return null;
   }
 };
+
+export const fetchCurrentUser = async (token: string) => {
+  try {
+    if (!token) {
+      return;
+    }
+    const response = await fetch(
+      `http://localhost:5292/api/Users/me?token=${token}`,
+      { method: "GET" }
+    );
+    if (!response.ok) {
+      throw new Error("User Not Found");
+    }
+    return await response.json();
+  } catch (err) {
+    return null;
+  }
+};

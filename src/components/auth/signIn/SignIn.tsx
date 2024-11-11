@@ -1,34 +1,29 @@
-import axios from "axios";
-import { MouseEventHandler, useState } from "react";
-
-interface SignIn {
-  onClickHandler: MouseEventHandler<HTMLInputElement> | undefined;
-}
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginUser } from "../../../services/AuthService";
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const onLoginClicked = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5292/api/Users/IsUserValid",
-        {
-          params: { email: email, password: password },
+  const onLoginClicked = () => {
+    loginUser(email, password)
+      .then((res) => {
+        if (!res) {
+          throw new Error("Invalid Email or Password");
         }
-      );
-      const token = response.data.token;
-      console.log(token);
-      localStorage.setItem("UserToken", token);
-    } catch (err) {
-      console.log(err);
-      setError("Invalid username or pasword");
-    }
+        localStorage.setItem("UserToken", res.data.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
+
   return (
     <div>
-      <div>{error != "" ? error : null}</div>
       <div>Sign In</div>
       <form>
         <label>Email</label>

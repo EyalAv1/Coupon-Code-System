@@ -1,33 +1,56 @@
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface User {
   id?: number;
-  compamyName: string;
-  email: string;
-  password: string;
+  CompanyName: string;
+  Email: string;
+  Password: string;
 }
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [compantName, setCompanyName] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [status, setStatus] = useState<string>("");
 
   const onClickHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
+    // const newUser: User = {
+    //   CompanyName: compantName,
+    //   Email: email,
+    //   Password: password,
+    // };
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:5292/api/Users/AddUser",
+    //     newUser
+    //   );
+    //   setStatus(`User added with ID: ${response.data.user.id}`);
+    //   console.log(response);
+    // } catch (error) {
+    //   console.error("Error adding user:", error);
+    //   setStatus("Failed to add user");
+    // }
     const newUser: User = {
-      compamyName: compantName,
-      email: email,
-      password: password,
+      CompanyName: companyName,
+      Email: email,
+      Password: password,
     };
-    try {
-      const response = await axios.post("http://localhost:5000/users", newUser);
-      setStatus(`User added with ID: ${response.data.id}`);
-    } catch (error) {
-      console.error("Error adding user:", error);
-      setStatus("Failed to add user");
-    }
+    await fetch("http://localhost:3000/users", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Invalid cradentials");
+        }
+        console.log("user added");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
   return (
     <div>

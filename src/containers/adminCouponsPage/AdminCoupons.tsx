@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./AdminCoupons.css";
-import AddIcon from "@mui/icons-material/AddCircle";
+import AddIcon from "../../assets/add_circle.png";
 
 export default function AdminCoupons() {
   const [coupons, setCoupons] = useState([]);
@@ -18,11 +18,12 @@ export default function AdminCoupons() {
   return (
     <div>
       <div className="AddCouponBTN">
-        {/* <button onClick={addCoupon}>
+        <button onClick={addCoupon}>
           <div className="AddCouponContent">
-            <AddIcon /> Add Coupon
+            <img src={AddIcon} className="AddIcon"/>
+            Add Coupon
           </div>
-        </button> */}
+        </button>
       </div>
       <div>
         {coupons.length != 0

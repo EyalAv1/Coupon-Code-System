@@ -1,10 +1,12 @@
 import "./App.css";
+import "react-toastify/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./containers/mainPage/MainPage";
 import AdminCoupons from "./containers/adminCouponsPage/AdminCoupons";
 import NavigationBar from "./components/navigation/NavigationBar";
 import Login from "./containers/login/Login";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -24,6 +26,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 }

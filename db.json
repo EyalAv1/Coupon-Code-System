@@ -18,15 +18,24 @@
   "users": [
     {
       "id": 1,
-      "companyName": "Asos",
-      "email": "john.doe@example.com",
-      "password":"1234"
+      "companyName": "Admin",
+      "email": "admin@admin.com",
+      "password": "Admin1234",
+      "isAdmin": true
     },
     {
       "id": 2,
+      "companyName": "Asos",
+      "email": "john.doe@example.com",
+      "password": "1234",
+      "isAdmin": false
+    },
+    {
+      "id": 3,
       "companyName": "Nike",
       "email": "jane.smith@example.com",
-      "password": "1234"
+      "password": "1234",
+      "isAdmin": false
     }
   ]
 }

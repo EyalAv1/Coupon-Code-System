@@ -21,19 +21,24 @@ export default function NavigationBar({ isLogin, onLogout }: Login) {
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
-        {isLogin ? (
+        {/* {isLogin ? (
           <a className="NavigationBarItem" href={"/adminCoupons"}>
             {<AccountIcon />}
           </a>
-        ) : null}
+        ) : null} */}
         {!isLogin ? (
           <a href="/login">
             <LoginIcon />
           </a>
         ) : (
-          <a onClick={onLogout}>
-            <LogoutIcon />
-          </a>
+          <div>
+            <a className="NavigationBarItem" href={"/adminCoupons"}>
+              {<AccountIcon />}
+            </a>
+            <a onClick={onLogout}>
+              <LogoutIcon />
+            </a>
+          </div>
         )}
       </div>
     </div>

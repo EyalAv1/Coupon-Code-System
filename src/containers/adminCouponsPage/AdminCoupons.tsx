@@ -74,8 +74,9 @@ export default function AdminCoupons() {
                 <CouponCardItem
                   couponCode={item.Code}
                   couponDiscount={item.DiscountAmount}
-                  couponName={item.Id}
-                  couponDescription="test"
+                  couponName={item.ExpirationDate}
+                  couponDescription={item.Description}
+                  couponId={item.Id}
                 />
               );
             })

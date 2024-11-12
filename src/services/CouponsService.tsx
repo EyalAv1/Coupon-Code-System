@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Coupon } from "../Models/Coupon";
+import { toast } from "react-toastify";
 
 const api = "http://localhost:5292/api/Coupons/";
 
@@ -55,6 +56,21 @@ export const addCoupon = async (coupon: Coupon) => {
     return data.json();
   } catch (err) {
     console.log("[err0r:]", err);
+    return null;
+  }
+};
+
+export const deleteCouponById = async (couponId: number) => {
+  try {
+    const response = await fetch(api + `DeleteCoupon?couponId=${couponId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Coupon not found");
+    }
+    return response.json();
+  } catch (err: any) {
+    toast.error(err);
     return null;
   }
 };

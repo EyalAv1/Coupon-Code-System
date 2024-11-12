@@ -10,16 +10,34 @@
 }
 
 .EditIconContainer{
-    display: flex;
-    justify-content: end;
+    /* display: flex; */
+    /* justify-content: end; */
     cursor: pointer;
+    /* position: relative; */
 }
 
 .EditIconContent{
-    position: absolute;
     margin-left: 5px;
 }
 
 .EditIconContent:hover {
     color:rgb(149, 88, 149);
+}
+
+.DeleteIconContent{
+    margin-left: 5px;
+}
+
+.DeleteIcon{
+    width: 24px;
+    height: 24px;
+}
+.DeleteIconContent:hover {
+    color: rgb(149, 88, 149);
+}
+
+.SettingsIocnContainer {
+    display: flex;
+    width: 100%;
+    position: relative;
 }

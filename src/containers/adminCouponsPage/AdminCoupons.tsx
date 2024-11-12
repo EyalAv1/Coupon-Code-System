@@ -19,6 +19,7 @@ export default function AdminCoupons() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
   useEffect(() => {
     if (!token) {
       navigate("/");
@@ -28,7 +29,7 @@ export default function AdminCoupons() {
   const fetchCoupons = () => {
     // fetch the coupons from the databse
     if (!currentUser) return;
-    getAllCouponsByUserId(currentUser.id)
+    getAllCouponsByUserId(currentUser.Id)
       .then((res) => {
         if (!res) {
           throw new Error("Invalid User ID");
@@ -71,9 +72,9 @@ export default function AdminCoupons() {
           ? coupons.map((item: any) => {
               return (
                 <CouponCardItem
-                  couponCode={item.code}
-                  couponDiscount={item.discountAmount}
-                  couponName={item.id}
+                  couponCode={item.Code}
+                  couponDiscount={item.DiscountAmount}
+                  couponName={item.Id}
                   couponDescription="test"
                 />
               );

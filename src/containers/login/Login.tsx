@@ -22,7 +22,7 @@ export default function Login() {
       >
         Sing Up
       </button>
-      {isSignIn ? <SignIn /> : <SignUp />}
+      {isSignIn ? <SignIn/> : <SignUp />}
     </div>
   );
 }

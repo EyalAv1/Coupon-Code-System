@@ -12,13 +12,14 @@
 .EditIconContainer{
     display: flex;
     justify-content: end;
+    cursor: pointer;
 }
 
 .EditIconContent{
-    position: fixed;
+    position: absolute;
+    margin-left: 5px;
 }
 
 .EditIconContent:hover {
-    cursor: pointer;
     color:rgb(149, 88, 149);
 }

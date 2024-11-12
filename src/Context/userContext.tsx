@@ -21,7 +21,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("UserToken")
   );
-//   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<any>(null);
   useEffect(() => {
     if (!token) {
@@ -33,10 +32,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         if (!res) {
           setToken(null);
           localStorage.setItem("UserToken", null!);
-          throw new Error("Useer Not Found");
+          throw new Error("User Not Found");
         }
-        setCurrentUser(res.user);
-        console.log(res.user);
+        setCurrentUser(res.User);
+        console.log(res.User);
         localStorage.setItem("UserToken", token!);
       })
       .catch((err) => {

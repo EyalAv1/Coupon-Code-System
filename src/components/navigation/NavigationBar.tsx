@@ -2,7 +2,7 @@ import "./NavigationBar.css";
 // import { Link } from "react-router-dom";
 import AccountIcon from "@mui/icons-material/AccountCircle";
 import TicketIcon from "@mui/icons-material/ConfirmationNumber";
-import CoupinLogo from "../../assets/CouponLogo.png";
+import CouponLogo from "../../assets/CouponLogo.png";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useContext } from "react";
@@ -16,18 +16,17 @@ export default function NavigationBar() {
 
   const logOut = () => {
     setToken(null);
-    localStorage.setItem("UserToken", null!);
     navigate("/");
   };
   return (
     <div className="NavigationBarContainer">
-      <img className="Logo" src={CoupinLogo} alt="Logo" />
+      <img className="Logo" src={CouponLogo} alt="Logo" />
       <div className="NavigationBarOutline">
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
         {!token ? (
-          <a href="/login">
+          <a href={"/Login"}>
             <LoginIcon />
           </a>
         ) : (

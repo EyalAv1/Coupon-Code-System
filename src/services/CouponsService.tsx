@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const api = "http://localhost:5292/api/Coupons/";
 

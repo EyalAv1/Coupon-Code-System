@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { fetchCurrentUser } from "../services/AuthService";
 import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
 
 interface UserContextType {
   token: string | null;
@@ -20,28 +21,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("UserToken")
   );
+//   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<any>(null);
   useEffect(() => {
-    // const fetchUser = async () => {
-    //   if (!token) {
-    //     return;
-    //   }
-    //   const response = await fetch(
-    //     `http://localhost:5292/api/Users/me?token=${token}`,
-    //     { method: "GET" }
-    //   );
-    //   if (!response.ok) {
-    //     setToken(null);
-    //     localStorage.setItem("UserToken", null!);
-    //   } else {
-    //     const userData = await response.json();
-    //     // console.log(userData.user);
-    //     setCurrentUser({ ...userData.user });
-    //     console.log(currentUser);
-    //     localStorage.setItem("UserToken", token!);
-    //   }
-    // };
-    // fetchUser();
+    if (!token) {
+      localStorage.setItem("UserToken", null!);
+      return;
+    }
     fetchCurrentUser(token!)
       .then((res) => {
         if (!res) {

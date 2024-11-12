@@ -26,11 +26,6 @@ export default function NavigationBar() {
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
-        {/* {isLogin ? (
-          <a className="NavigationBarItem" href={"/adminCoupons"}>
-            {<AccountIcon />}
-          </a>
-        ) : null} */}
         {!token ? (
           <a href="/login">
             <LoginIcon />

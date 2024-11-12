@@ -17,3 +17,11 @@
     height: 24px;
     margin-right: 3px;
 }
+
+.UserFunctions {
+    display: flex;
+}
+
+.AdminCoupons{
+    display: flex;
+}

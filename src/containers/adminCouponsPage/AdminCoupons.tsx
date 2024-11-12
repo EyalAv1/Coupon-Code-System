@@ -7,19 +7,28 @@ import { UserContext } from "../../Context/userContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import CouponCardItem from "../../components/couponCard/CouponCardItem";
+import AddCoupon from "../../components/forms/addCouonForm/AddCoupon";
+import Modal from "../../components/modal/Modal";
 
 export default function AdminCoupons() {
   const { token, setToken, currentUser } = useContext(UserContext)!;
   const [coupons, setCoupons] = useState<Array<any>>([]);
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   useEffect(() => {
     if (!token) {
       navigate("/");
     }
-  }, []);
-  const fetchCoupons = async () => {
+  }, [token]);
+
+  const fetchCoupons = () => {
     // fetch the coupons from the databse
-    await getAllCouponsByUserId(1)
+    if (!currentUser) return;
+    getAllCouponsByUserId(currentUser.id)
       .then((res) => {
         if (!res) {
           throw new Error("Invalid User ID");
@@ -32,26 +41,32 @@ export default function AdminCoupons() {
   };
   useEffect(() => {
     fetchCoupons();
-  }, []);
+  }, [currentUser]);
 
-  const addCoupon = async () => {};
   return (
     <div>
-      <div className="AddCouponBTN">
-        <button onClick={addCoupon}>
-          <div className="AddCouponContent">
-            <img src={AddIcon} className="AddIcon" />
-            Add Coupon
-          </div>
-        </button>
-        <button>
-          <div className="AddCouponContent">
-            <AddUserIcon className="AddIcon" />
-            Add User
-          </div>
-        </button>
+      <div className="UserFunctions">
+        <div className="AddCouponBTN">
+          <button onClick={openModal}>
+            <div className="AddCouponContent">
+              <img src={AddIcon} className="AddIcon" />
+              Add Coupon
+            </div>
+          </button>
+        </div>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <AddCoupon />
+        </Modal>
+        <div className="AddCouponBTN">
+          <button>
+            <div className="AddCouponContent">
+              <AddUserIcon className="AddIcon" />
+              Add User
+            </div>
+          </button>
+        </div>
       </div>
-      <div>
+      <div className="AdminCoupons">
         {coupons.length != 0
           ? coupons.map((item: any) => {
               return (
@@ -65,7 +80,6 @@ export default function AdminCoupons() {
             })
           : "No Coupons Found"}
       </div>
-      {/* <CouponCardItem couponName="Test" couponCode="1234" couponDiscount={15} couponDescription="Test the coupon card"/> */}
     </div>
   );
 }

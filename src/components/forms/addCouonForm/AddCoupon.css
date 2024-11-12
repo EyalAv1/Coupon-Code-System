@@ -1,0 +1,39 @@
+.AddCouponFrom {
+    display: flex;
+    flex-direction: column;
+    max-width:fit-content;
+}
+
+.AddCouponFrom label{
+    width: 100%;
+    align-items:start;
+    margin-right: 5px;
+}
+
+.AddCouponFrom input{
+    margin-top: 5px;
+    border: 1px solid purple;
+    border-radius: 0.5rem;
+    padding-left: 5px;
+    outline: none;
+}
+
+.AddCouponFrom input:focus {
+    border: 3px solid purple;
+}
+
+
+.AddCouponFrom input[type="text"],
+.AddCouponFrom input[type="date"],
+.AddCouponFrom input[type="number"] {
+    height: 25px;
+}
+
+.AddCouponFrom input[type="radio"],
+.AddCouponFrom input[type="checkbox"] {
+    width: auto;
+    /* Keep radio and checkbox small */
+    background-color: black;
+    border: 0.5rem solid black;
+}
+

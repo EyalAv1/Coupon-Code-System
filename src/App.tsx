@@ -1,30 +1,20 @@
 import "./App.css";
 import "react-toastify/ReactToastify.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainPage from "./containers/mainPage/MainPage";
 import AdminCoupons from "./containers/adminCouponsPage/AdminCoupons";
 import NavigationBar from "./components/navigation/NavigationBar";
 import Login from "./containers/login/Login";
-import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const handleLoginSuccess = () => {
-    setIsLogin(true);
-  };
-  const handleLogout = () => setIsLogin(false);
   return (
     <>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/adminCoupons" element={<AdminCoupons />} />
-        <Route
-          path="/Login"
-          element={<Login onLoginSuccess={handleLoginSuccess} />}
-        />
+        <Route path="/Login" element={<Login />} />
       </Routes>
       <ToastContainer />
     </>

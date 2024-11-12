@@ -3,16 +3,7 @@ import "./Login.css";
 import SignIn from "../../components/auth/signIn/SignIn";
 import SignUp from "../../components/auth/signUp/SignUp";
 
-interface LoginProps {
-  onLoginSuccess: () => void; // The function that will be called on successful login
-}
-// interface User {
-//   id?: number;
-//   username: string;
-//   passwordHash: string;
-// }
-
-export default function Login({ onLoginSuccess }: LoginProps) {
+export default function Login() {
   const [isSignIn, setIsSignIn] = useState(true);
 
   return (
@@ -31,7 +22,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       >
         Sing Up
       </button>
-      {isSignIn ? <SignIn/> : <SignUp />}
+      {isSignIn ? <SignIn /> : <SignUp />}
     </div>
   );
 }

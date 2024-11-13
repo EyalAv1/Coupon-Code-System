@@ -4,11 +4,6 @@ import { getAllCoupons } from "../../../services/CouponsService";
 import { Coupon, UserCouponCardType } from "../../../Models/Coupon";
 import CouponUserCardItem from "./couponUserCardItem/CouponUserCardItem";
 
-// interface UserCouponCard {
-//   couponCode: string;
-//   couponValidationDate: Date;
-// }
-
 export default function UserCouponCard() {
   const [coupons, setCoupons] = useState([]);
   const getCoupons = () => {

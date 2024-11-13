@@ -11,7 +11,7 @@ import AddCoupon from "../../components/forms/addCouonForm/AddCoupon";
 import Modal from "../../components/modal/Modal";
 
 export default function AdminCoupons() {
-  const { token, setToken, currentUser } = useContext(UserContext)!;
+  const { token, currentUser } = useContext(UserContext)!;
   const [coupons, setCoupons] = useState<Array<any>>([]);
   const navigate = useNavigate();
 

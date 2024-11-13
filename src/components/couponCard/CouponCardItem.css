@@ -1,19 +1,19 @@
 .CouponItem{
-    border: 1px solid rgb(221, 160, 221);
-    width: fit-content;
+    border: 4px dashed rgb(221, 160, 221);
+    width: 100%;
+    max-width: 250px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 1rem;
+    box-sizing: border-box;
     margin: 5px;
 }
 
 .EditIconContainer{
-    /* display: flex; */
-    /* justify-content: end; */
+
     cursor: pointer;
-    /* position: relative; */
 }
 
 .EditIconContent{

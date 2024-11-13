@@ -1,42 +1,32 @@
 import "./CouponCardItem.css";
-import EditIcon from "@mui/icons-material/Edit"
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteCouponById } from "../../services/CouponsService";
 import { toast } from "react-toastify";
+import { Coupon } from "../../Models/Coupon";
 
-interface ItemProps {
-  couponName: string;
-  couponCode: string;
-  couponDiscount: number;
-  couponDescription : string;
-  couponId: number,
+interface couponProps {
+  coupon: Coupon;
 }
 
-export default function CouponCardItem({
-  couponName,
-  couponCode,
-  couponDiscount,
-  couponDescription,
-  couponId,
-}: ItemProps) {
-
+export default function CouponCardItem({ coupon }: couponProps) {
   const editCardContent = async () => {
     //edit the card content
-  }
+  };
 
-    const onDeleteCoupon = (e: any) => {
-      e.preventDefault();
-      deleteCouponById(couponId)
-        .then((res) => {
-          if (!res) {
-            throw new Error("Coupon not exist");
-          }
-          window.location.reload();
-        })
-        .catch((err) => {
-          toast.error(err);
-        });
-    };
+  const onDeleteCoupon = (e: any) => {
+    e.preventDefault();
+    deleteCouponById(coupon.id!)
+      .then((res) => {
+        if (!res) {
+          throw new Error("Coupon not exist");
+        }
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
 
   return (
     <div className="CouponItem">
@@ -53,10 +43,17 @@ export default function CouponCardItem({
           </div>
         </div>
       </div>
-      <div>{couponName}</div>
-      <div>{couponCode}</div>
-      <div>{couponDiscount}</div>
-      <div>{couponDescription}</div>
+      <div>Code: {coupon.Code}</div>
+      <div>
+        Discount:{" "}
+        {coupon.IsPercentages
+          ? `${coupon.DiscountAmount}%`
+          : `${coupon.DiscountAmount} NIS`}
+      </div>
+      <div>
+        {coupon.Description != "" ? `Description: ${coupon.Description}` : null}
+      </div>
+      <div>Expiration Date: {coupon.ExpirationDate?.toString()}</div>
     </div>
   );
 }

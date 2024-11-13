@@ -25,5 +25,9 @@
 }
 
 .AdminCoupons{
-    display: flex;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-items: center;
+    gap: 16px;
 }

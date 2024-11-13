@@ -74,16 +74,7 @@ export default function AdminCoupons() {
       <div className="AdminCoupons">
         {coupons.length != 0
           ? coupons.map((item: any) => {
-              return (
-                <CouponCardItem
-                  key={item.Code}
-                  couponCode={item.Code}
-                  couponDiscount={item.DiscountAmount}
-                  couponName={item.ExpirationDate}
-                  couponDescription={item.Description}
-                  couponId={item.Id}
-                />
-              );
+              return <CouponCardItem coupon={item} key={item.Code}/>;
             })
           : "No Coupons Found"}
       </div>

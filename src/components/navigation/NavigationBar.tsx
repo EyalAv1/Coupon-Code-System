@@ -7,7 +7,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useContext } from "react";
 import { UserContext } from "../../Context/userContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NavigationBar() {
   const navigate = useNavigate();
@@ -25,10 +25,10 @@ export default function NavigationBar() {
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
-        {!token || !currentUser? (
-          <a href={"/Login"}>
+        {!token || !currentUser ? (
+          <NavLink to={"/Login"}>
             <LoginIcon />
-          </a>
+          </NavLink>
         ) : (
           <div>
             <a className="NavigationBarItem" href={"/adminCoupons"}>

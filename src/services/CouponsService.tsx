@@ -96,6 +96,7 @@ export const updateCouponUsageCount = async (newCoupon: Coupon) => {
   }
 };
 
+// fetch all coupons by asked dated period
 export const getFiltersCoupons = async (startDate: Date, endDate: Date) => {
   try {
     const response = await fetch(

@@ -1,3 +1,4 @@
+import "./DateFilterForm.css";
 type FilterDateReport = {
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;
   setEndDate: React.Dispatch<React.SetStateAction<Date>>;
@@ -10,18 +11,24 @@ export default function DateFilterForm({
   onCreateReportClicked,
 }: FilterDateReport) {
   return (
-    <div>
-      <form>
-        <input
-          type="date"
-          placeholder="Enter Start Date"
-          onChange={(e) => setStartDate(new Date(e.target.value))}
-        />
-        <input
-          type="date"
-          placeholder="Enter End Date"
-          onChange={(e) => setEndDate(new Date(e.target.value))}
-        />
+    <div className="FormContainer">
+      <form className="FormContent">
+        <label>
+          From:
+          <input
+            type="date"
+            placeholder="Enter Start Date"
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+          />
+        </label>
+        <label>
+          To:
+          <input
+            type="date"
+            placeholder="Enter End Date"
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+          />
+        </label>
         <button onClick={(e) => onCreateReportClicked(e)}>Create Report</button>
       </form>
     </div>

@@ -5,6 +5,7 @@ import DateFilterForm from "../../components/forms/adminReportsForms/filterByDat
 import { getFiltersCoupons } from "../../services/CouponsService";
 import { Coupon } from "../../Models/Coupon";
 import { toast } from "react-toastify";
+import * as XLSX from "xlsx";
 
 export default function AdminReports() {
   const navigate = useNavigate();
@@ -34,16 +35,21 @@ export default function AdminReports() {
         toast(err);
       });
   };
+
+  const exportToExcel = (data: any[], fileName: string) => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "AdminReport");
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  };
+
   return (
     <div>
-      <div>reports slection</div>
-      <div></div>
       <DateFilterForm
         setStartDate={setStartDate}
         setEndDate={setEndDate}
         onCreateReportClicked={onReportDateSelected}
       />
-      <div> reports body</div>
       <div>
         {filteredCoupons.map((coupon) => {
           return (
@@ -53,6 +59,13 @@ export default function AdminReports() {
           );
         })}
       </div>
+      {filteredCoupons.length == 0 ? null : (
+        <button
+          onClick={() => exportToExcel(filteredCoupons, "Coupons Reapot")}
+        >
+          Export to Excel
+        </button>
+      )}
     </div>
   );
 }

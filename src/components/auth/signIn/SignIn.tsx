@@ -26,6 +26,7 @@ export default function SignIn() {
         navigate("/");
       })
       .catch((err) => {
+        console.log(err);
         toast.error("Invalid Email or Password");
       });
   };

@@ -1,0 +1,21 @@
+.FunctionBTN {
+    /* display: flex; */
+    justify-content: end;
+}
+
+.FunctionBTN:active {
+    transform: translateY(4px);
+}
+
+.FunctionBTNContent {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.UserFunctions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin: 10px;
+}

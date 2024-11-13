@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Coupon } from "../Models/Coupon";
 import { toast } from "react-toastify";
-import { METHODS } from "http";
 
 const api = "http://localhost:5292/api/Coupons/";
 

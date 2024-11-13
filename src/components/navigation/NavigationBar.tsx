@@ -32,7 +32,8 @@ export default function NavigationBar() {
         ) : (
           <div>
             <NavLink className="NavigationBarItem" to={"/adminCoupons"}>
-              {<AccountIcon />}
+              {/* {<AccountIcon />} */}
+              profile
             </NavLink>
             <a onClick={logOut}>
               <LogoutIcon />

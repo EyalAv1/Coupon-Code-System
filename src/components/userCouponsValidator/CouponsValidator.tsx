@@ -113,7 +113,7 @@ export default function CouponsValidatoer() {
           Add Coupon
         </Button>
       </form>
-      <CouponCart coupons={validateCoupons} totalPrice={couponsDiscount} />
+      <CouponCart coupons={validateCoupons} setValidateCoupons={setValidateCoupons} totalPrice={couponsDiscount} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 {
   "name": "coupon-codes-system",
+  "homepage": "https://EyalAv1.github.io/Coupon-Code-System",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 5000"
+    "server": "json-server --watch db.json --port 5000",
+    "predeploy": "vite build",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -33,6 +36,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "file-saver": "^2.0.5",
+    "gh-pages": "^6.2.0",
     "globals": "^15.11.0",
     "json-server": "^1.0.0-beta.3",
     "typescript": "~5.6.2",

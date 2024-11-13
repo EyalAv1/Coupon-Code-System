@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import "./AdminCoupons.css";
 import AddIcon from "../../assets/add_circle.png";
-import AddUserIcon from "@mui/icons-material/PersonAdd";
+import ReportIcon from "@mui/icons-material/Summarize";
 import { getAllCouponsByUserId } from "../../services/CouponsService";
 import { UserContext } from "../../Context/userContext";
 import { useNavigate } from "react-router-dom";
@@ -59,10 +59,14 @@ export default function AdminCoupons() {
           <AddCoupon />
         </Modal>
         <div className="AddCouponBTN">
-          <button>
+          <button
+            onClick={() => {
+              navigate("/Reports");
+            }}
+          >
             <div className="AddCouponContent">
-              <AddUserIcon className="AddIcon" />
-              Add User
+              <ReportIcon className="AddIcon" />
+              Reports
             </div>
           </button>
         </div>
@@ -72,6 +76,7 @@ export default function AdminCoupons() {
           ? coupons.map((item: any) => {
               return (
                 <CouponCardItem
+                  key={item.Code}
                   couponCode={item.Code}
                   couponDiscount={item.DiscountAmount}
                   couponName={item.ExpirationDate}

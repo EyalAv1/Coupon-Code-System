@@ -2,6 +2,7 @@ import { useState } from "react";
 import { addUser } from "../../../services/AuthService";
 import { User } from "../../../Models/User";
 import "../signIn/SignIn.css";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,11 +20,15 @@ export default function SignUp() {
       Password: password,
       IsAdmin: false,
     };
-    addUser(newUser).then((res) => {
-      if (!res) {
-        throw new Error("Invalid Credentials");
-      }
-    });
+    addUser(newUser)
+      .then((res) => {
+        if (!res) {
+          throw new Error("Invalid Credentials");
+        }
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
   return (
     <div className="SinInFormContainer">

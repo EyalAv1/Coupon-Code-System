@@ -1,5 +1,5 @@
 .AddCouponBTN {
-    display: flex;
+    /* display: flex; */
     justify-content: end;
 
 }
@@ -20,6 +20,8 @@
 
 .UserFunctions {
     display: flex;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .AdminCoupons{

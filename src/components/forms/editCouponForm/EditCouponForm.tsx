@@ -1,21 +1,33 @@
 import { useContext, useState } from "react";
-import "./AddCoupon.css";
-import { addCoupon } from "../../../services/CouponsService";
+import { updateCoupn } from "../../../services/CouponsService";
 import { Coupon } from "../../../Models/Coupon";
 import { UserContext } from "../../../Context/userContext";
 
-export default function AddCoupon() {
+type EditCouponType = {
+  coupon: Coupon;
+};
+
+export default function EditCoupon({ coupon }: EditCouponType) {
   const { currentUser } = useContext(UserContext)!;
   //   const [discountType, setDiscountType] = useState<string>("percentage");
-  const [isUsageLimitEnabled, setIsUsageLimitEnabled] = useState<boolean>(true);
-  const [code, setCode] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [isDiscountInPercentage, setIsDiscountInPercentage] =
-    useState<boolean>();
-  const [discountAmount, setDiscountAmount] = useState<number>();
-  const [isDoublePromotion, setIsDoublePromotion] = useState<boolean>(false);
-  const [expieryDate, setExpieryDate] = useState<Date | undefined>(undefined);
-  const [usageLimit, setUsageLimit] = useState<number | null>();
+  const [isUsageLimitEnabled, setIsUsageLimitEnabled] = useState<boolean>();
+  const [code, setCode] = useState<string>(coupon.Code);
+  const [description, setDescription] = useState<string>(coupon.Description);
+  const [isDiscountInPercentage, setIsDiscountInPercentage] = useState<boolean>(
+    coupon.IsPercentages
+  );
+  const [discountAmount, setDiscountAmount] = useState<number>(
+    coupon.DiscountAmount
+  );
+  const [isDoublePromotion, setIsDoublePromotion] = useState<boolean>(
+    coupon.AllowDoublePromotion
+  );
+  const [expieryDate, setExpieryDate] = useState<Date | undefined>(
+    coupon.ExpirationDate
+  );
+  const [usageLimit, setUsageLimit] = useState<number | undefined>(
+    coupon.UsageLimit
+  );
 
   const onDiscountTypeChange = (type: string) => {
     if (type == "percentage") setIsDiscountInPercentage(true);
@@ -40,7 +52,7 @@ export default function AddCoupon() {
       UsageCount: 0,
       UserId: currentUser.Id,
     };
-    addCoupon(newCoupon)
+    updateCoupn(newCoupon)
       .then((res) => {
         if (!res) {
           throw new Error("Invalid Cradentials");
@@ -62,10 +74,13 @@ export default function AddCoupon() {
           type="text"
           placeholder="Code"
           onChange={(e) => setCode(e.target.value)}
+          value={code}
+          disabled
         />
         <input
           type="text"
           placeholder="Description"
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <label>
@@ -101,6 +116,7 @@ export default function AddCoupon() {
         <input
           type="date"
           placeholder="Expiery Date"
+          value={expieryDate?.toString()}
           onChange={(e) =>
             setExpieryDate(
               e.target.value ? new Date(e.target.value) : undefined
@@ -149,7 +165,7 @@ export default function AddCoupon() {
             onChange={(e) => setUsageLimit(parseInt(e.target.value))}
           />
         ) : null}
-        <button onClick={(e) => onAddCoupon(e)}>ADD</button>
+        <button onClick={(e) => onAddCoupon(e)}>Update</button>
       </form>
     </>
   );

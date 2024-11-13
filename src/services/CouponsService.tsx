@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Coupon } from "../Models/Coupon";
 import { toast } from "react-toastify";
+import { METHODS } from "http";
 
 const api = "http://localhost:5292/api/Coupons/";
 
@@ -88,6 +89,23 @@ export const updateCouponUsageCount = async (newCoupon: Coupon) => {
     });
     if (!response.ok) {
       throw new Error(`Failed to update coupon usage count ${response.status}`);
+    }
+    return response.json();
+  } catch (err: any) {
+    toast.warning(err);
+    return null;
+  }
+};
+
+export const updateCoupn = async (newCoupon: Coupon) => {
+  try {
+    const response = await fetch(api + `updateCoupon/${newCoupon.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCoupon),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to update coupon ${response.status}`);
     }
     return response.json();
   } catch (err: any) {

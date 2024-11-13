@@ -1,4 +1,4 @@
-import './CouponUserCardItem.css'
+import "./CouponUserCardItem.css";
 import { getReadbaleDate } from "../../../../helpers/CouponValidation";
 import { UserCouponCardType } from "../../../../Models/Coupon";
 
@@ -11,7 +11,9 @@ export default function CouponUserCardItem({
       <div>Code: {couponCode}</div>
       <div>
         Expiery Date:&nbsp;
-        {getReadbaleDate(couponValidationDate).toLocaleDateString()}
+        {couponValidationDate != null
+          ? getReadbaleDate(couponValidationDate).toLocaleDateString()
+          : "Unlimited"}
       </div>
     </div>
   );

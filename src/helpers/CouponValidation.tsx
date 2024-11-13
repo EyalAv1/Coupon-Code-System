@@ -11,7 +11,7 @@ export const isCouponValid = (
   numOfValidatedCoupons: number,
   coupon: Coupon
 ) => {
-  if (coupon.ExpirationDate != undefined) {
+  if (coupon.ExpirationDate != null) {
     const expieryDate = getReadbaleDate(coupon.ExpirationDate);
     const currentDate = new Date();
     if (expieryDate < currentDate) {

@@ -4,15 +4,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteCouponById } from "../../services/CouponsService";
 import { toast } from "react-toastify";
 import { Coupon } from "../../Models/Coupon";
+import Modal from "../modal/Modal";
+import EditCoupon from "../forms/editCouponForm/EditCouponForm";
+import { useState } from "react";
 
 interface couponProps {
   coupon: Coupon;
 }
 
 export default function CouponCardItem({ coupon }: couponProps) {
-  const editCardContent = async () => {
-    //edit the card content
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const onDeleteCoupon = (e: any) => {
     e.preventDefault();
@@ -32,7 +36,7 @@ export default function CouponCardItem({ coupon }: couponProps) {
     <div className="CouponItem">
       <div className="SettingsIocnContainer">
         <div className="EditIconContainer">
-          <div className="EditIconContent" onClick={editCardContent}>
+          <div className="EditIconContent" onClick={openModal}>
             <EditIcon />
           </div>
         </div>
@@ -53,7 +57,10 @@ export default function CouponCardItem({ coupon }: couponProps) {
       <div>
         {coupon.Description != "" ? `Description: ${coupon.Description}` : null}
       </div>
-      <div>Expiration Date: {coupon.ExpirationDate?.toString()}</div>
+      <div>Expiration Date: {coupon.ExpirationDate != null ? coupon.ExpirationDate?.toString() : "Unlimited"}</div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <EditCoupon coupon={coupon} />
+      </Modal>
     </div>
   );
 }

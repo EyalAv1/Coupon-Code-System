@@ -35,7 +35,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
           throw new Error("User Not Found");
         }
         setCurrentUser(res.User);
-        console.log(res.User);
+        // console.log(res.User);
         localStorage.setItem("UserToken", token!);
       })
       .catch((err) => {

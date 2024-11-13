@@ -19,7 +19,6 @@ export default function SignIn() {
           throw new Error("Invalid Email or Password");
         }
         // localStorage.setItem("UserToken", res.Token);
-        console.log(res.Token);
         setToken(res.Token);
         navigate("/");
       })

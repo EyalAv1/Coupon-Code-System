@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function NavigationBar() {
   const navigate = useNavigate();
 
-  const { token, setToken } = useContext(UserContext)!;
+  const { token, setToken, currentUser } = useContext(UserContext)!;
 
   const logOut = () => {
     setToken(null);
@@ -25,7 +25,7 @@ export default function NavigationBar() {
         <a className="NavigationBarItem" href={"/"}>
           {<TicketIcon />}
         </a>
-        {!token ? (
+        {!token || !currentUser? (
           <a href={"/Login"}>
             <LoginIcon />
           </a>

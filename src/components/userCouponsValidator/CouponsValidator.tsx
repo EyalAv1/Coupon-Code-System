@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CouponsValidator.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -9,6 +9,7 @@ import {
   isCouponValid,
 } from "../../helpers/CouponValidation";
 import { toast } from "react-toastify";
+import CouponCart from "../cart/CouponCart";
 
 export default function CouponsValidatoer() {
   const [couponCode, setCouponCode] = useState<string>("");
@@ -16,6 +17,10 @@ export default function CouponsValidatoer() {
   const [validateCoupons, setValidateCoupons] = useState<Array<string>>([]);
   const [isCouponDoublePromotionExist, setIsCouponDoublePromotionExist] =
     useState<boolean>(false);
+  useEffect(() => {
+    let string = JSON.stringify([...validateCoupons]);
+    localStorage.setItem("couponCart", string);
+  }, [validateCoupons]);
   const onCouponValidate = () => {
     getCouponByName(couponCode)
       .then((res) => {
@@ -30,8 +35,9 @@ export default function CouponsValidatoer() {
         if (!validateCoupons.includes(coupon.Code)) {
           if (!isCouponDoublePromotionExist) {
             if (couponValidationStatus == CouponValidationStatus.Valid) {
-              const discount: number = coupon.DiscountAmount;
-              setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
+              // const discount: number = coupon.DiscountAmount;
+              // setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
+              calculateDiscount(coupon);
               setValidateCoupons([...validateCoupons, couponCode]);
               if (!coupon.AllowDoublePromotion) {
                 setIsCouponDoublePromotionExist(true);
@@ -50,6 +56,23 @@ export default function CouponsValidatoer() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const calculateDiscount = (coupon: Coupon) => {
+    const discount: number = coupon.DiscountAmount;
+    if (coupon.IsPercentages) {
+      if (couponsDiscount <= 0) {
+        toast.error("Oops! too many coupons");
+      } else {
+        setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
+      }
+    } else {
+      if (couponsDiscount - discount < 0) {
+        toast.error("Oops! too many coupons");
+      } else {
+        setCouponsDiscount(couponsDiscount - discount!);
+      }
+    }
   };
 
   return (
@@ -91,7 +114,7 @@ export default function CouponsValidatoer() {
           }}
           onClick={onCouponValidate}
         >
-          CHECK IT OUT
+          Add Coupon
         </Button>
       </form>
       {validateCoupons
@@ -99,7 +122,7 @@ export default function CouponsValidatoer() {
             return <div key={c}>{c}</div>;
           })
         : null}
-      <div> your current coupons discount : {couponsDiscount}</div>
+      <CouponCart coupons={validateCoupons} totalPrice={couponsDiscount} />
     </div>
   );
 }

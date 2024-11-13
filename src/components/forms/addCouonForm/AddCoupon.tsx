@@ -57,6 +57,9 @@ export default function AddCoupon() {
   return (
     <>
       <form className="AddCouponFrom">
+        <div>
+          <h2>Add New Coupon</h2>
+        </div>
         <input
           type="text"
           placeholder="Code"

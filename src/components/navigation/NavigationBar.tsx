@@ -22,9 +22,9 @@ export default function NavigationBar() {
     <div className="NavigationBarContainer">
       <img className="Logo" src={CouponLogo} alt="Logo" />
       <div className="NavigationBarOutline">
-        <a className="NavigationBarItem" href={"/"}>
+        <NavLink className="NavigationBarItem" to={"/"}>
           {<TicketIcon />}
-        </a>
+        </NavLink>
         {!token || !currentUser ? (
           <NavLink to={"/Login"}>
             <LoginIcon />

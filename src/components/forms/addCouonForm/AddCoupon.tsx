@@ -26,7 +26,7 @@ export default function AddCoupon() {
     else setIsDoublePromotion(false);
   };
 
-  const onAddCoupon = (e: any) => {
+  const onAddCoupon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     console.log(expieryDate);
     const newCoupon: Coupon = {

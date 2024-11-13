@@ -87,11 +87,30 @@ export const updateCouponUsageCount = async (newCoupon: Coupon) => {
       body: JSON.stringify(patchDoc),
     });
     if (!response.ok) {
-      throw new Error(`Failed to update coupon usage count${response.status}`);
+      throw new Error(`Failed to update coupon usage count ${response.status}`);
     }
     return response.json();
   } catch (err: any) {
     toast.warning(err);
+    return null;
+  }
+};
+
+export const getFiltersCoupons = async (startDate: Date, endDate: Date) => {
+  try {
+    const response = await fetch(
+      api +
+        `CouponsByDates?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("unable to load the coupons");
+    }
+    return response.json();
+  } catch (err) {
     return null;
   }
 };

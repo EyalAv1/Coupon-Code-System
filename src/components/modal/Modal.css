@@ -16,7 +16,7 @@
     padding: 20px;
     border-radius: 8px;
     position: relative;
-    max-width: 450px;
+    max-width: max-content;
     width: 90%;
 }
 

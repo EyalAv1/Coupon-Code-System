@@ -1,3 +1,4 @@
+import "./SignIn.css";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,30 +13,40 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onLoginClicked = () => {
+  const onLoginClicked = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     loginUser(email, password)
       .then((res) => {
         if (!res) {
           throw new Error("Invalid Email or Password");
         }
-        // localStorage.setItem("UserToken", res.Token);
         setToken(res.Token);
         navigate("/");
       })
       .catch((err) => {
-        toast.error(err);
+        toast.error("Invalid Email or Password");
       });
   };
 
   return (
-    <div>
-      <div>Sign In</div>
-      <form>
-        <label>Email</label>
-        <input type="text" onChange={(e) => setEmail(e.target.value)} />
-        <label>Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <input type="button" value="Login" onClick={onLoginClicked} />
+    <div className="SinInFormContainer">
+      <form className="SignInForm">
+        <label>
+          <h2>Sign In</h2>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button onClick={(e) => onLoginClicked(e)}>Login</button>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addUser } from "../../../services/AuthService";
 import { User } from "../../../Models/User";
+import "../signIn/SignIn.css";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -8,7 +9,9 @@ export default function SignUp() {
   const [companyName, setCompanyName] = useState("");
   // const [status, setStatus] = useState<string>("");
 
-  const onClickHandler = async (e: React.FormEvent) => {
+  const onClickHandler = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     const newUser: User = {
       CompanyName: companyName,
@@ -20,20 +23,30 @@ export default function SignUp() {
       if (!res) {
         throw new Error("Invalid Credentials");
       }
-      console.log(res);
-      // window.location.reload();
     });
   };
   return (
-    <div>
-      <form>
-        <label>email</label>
-        <input type="text" onChange={(e) => setEmail(e.target.value)} />
-        <label>Company Name</label>
-        <input type="text" onChange={(e) => setCompanyName(e.target.value)} />
-        <label>Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <input type="button" value="SignUp" onClick={onClickHandler} />
+    <div className="SinInFormContainer">
+      <form className="SignInForm">
+        <label>
+          <h2>Sign Up</h2>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <input
+          type="text"
+          onChange={(e) => setCompanyName(e.target.value)}
+          placeholder="Company Name"
+        />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button onClick={(e) => onClickHandler(e)}>Sign Up</button>
       </form>
     </div>
   );

@@ -28,6 +28,7 @@ export default function AddCoupon() {
 
   const onAddCoupon = (e: any) => {
     e.preventDefault();
+    console.log(expieryDate);
     const newCoupon: Coupon = {
       Code: code,
       Description: description,

@@ -3,30 +3,55 @@ import "./CouponsValidator.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { getCouponByName } from "../../services/CouponsService";
+import { Coupon } from "../../Models/Coupon";
+import {
+  CouponValidationStatus,
+  isCouponValid,
+} from "../../helpers/CouponValidation";
+import { toast } from "react-toastify";
 
 export default function CouponsValidatoer() {
   const [couponCode, setCouponCode] = useState<string>("");
   const [couponsDiscount, setCouponsDiscount] = useState<number>(100);
   const [validateCoupons, setValidateCoupons] = useState<Array<string>>([]);
+  const [isCouponDoublePromotionExist, setIsCouponDoublePromotionExist] =
+    useState<boolean>(false);
   const onCouponValidate = () => {
-    console.log(couponCode);
     getCouponByName(couponCode)
       .then((res) => {
         if (!res) {
           throw new Error("Coupon not found");
         }
-        console.log(res);
-        setValidateCoupons([...validateCoupons, couponCode]);
-        const coupon = res;
-        console.log("coupon => ", coupon);
-        const discount: number = coupon.discountAmount;
-        console.log(coupon.discountAmount);
-        setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
+        const coupon: Coupon = res;
+        const couponValidationStatus = isCouponValid(
+          validateCoupons.length,
+          coupon
+        );
+        if (!validateCoupons.includes(coupon.Code)) {
+          if (!isCouponDoublePromotionExist) {
+            if (couponValidationStatus == CouponValidationStatus.Valid) {
+              const discount: number = coupon.DiscountAmount;
+              setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
+              setValidateCoupons([...validateCoupons, couponCode]);
+              if (!coupon.AllowDoublePromotion) {
+                setIsCouponDoublePromotionExist(true);
+              }
+              toast.info("Coupon Added!");
+            } else {
+              toast.warning(couponValidationStatus);
+            }
+          } else {
+            toast.warning(CouponValidationStatus.Promorion);
+          }
+        } else {
+          toast.error("Coupon Already In Use");
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return (
     <div>
       <form className="Form">
@@ -38,23 +63,23 @@ export default function CouponsValidatoer() {
             paddingRight: "10px",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "#bdc0f8", // Default border color
+                borderColor: "#b39bde", // Default border color
               },
               "&:hover fieldset": {
-                borderColor: "#bdc0f8", // Border color on hover
+                borderColor: "#b39bde", // Border color on hover
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#bdc0f8", // Border color when focused
+                borderColor: "#b39bde", // Border color when focused
               },
             },
             "& .MuiInputLabel-root": {
-              color: "#bdc0f8", // Label color
+              color: "#b39bde", // Label color
             },
             "& .MuiInputLabel-root.Mui-focused": {
-              color: "#bdc0f8", // Label color when focused
+              color: "#b39bde", // Label color when focused
             },
             "& .MuiOutlinedInput-input": {
-              color: "#bdc0f8", // Text color inside the input field
+              color: "#b39bde", // Text color inside the input field
             },
           }}
           onChange={(e) => setCouponCode(e.target.value)}
@@ -62,7 +87,7 @@ export default function CouponsValidatoer() {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#bdc0f8",
+            backgroundColor: "#b39bde",
           }}
           onClick={onCouponValidate}
         >
@@ -71,7 +96,7 @@ export default function CouponsValidatoer() {
       </form>
       {validateCoupons
         ? validateCoupons.map((c) => {
-            return <div>{c}</div>;
+            return <div key={c}>{c}</div>;
           })
         : null}
       <div> your current coupons discount : {couponsDiscount}</div>

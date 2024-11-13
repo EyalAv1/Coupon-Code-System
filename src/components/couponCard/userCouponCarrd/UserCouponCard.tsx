@@ -11,7 +11,6 @@ export default function UserCouponCard() {
       if (!res) {
         throw new Error("Canno get coupons from server");
       }
-      console.log(res.data);
       setCoupons(
         res.data.map((coupon: Coupon) => {
           return {

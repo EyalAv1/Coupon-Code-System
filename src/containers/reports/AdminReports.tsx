@@ -5,18 +5,18 @@ import { useNavigate } from "react-router-dom";
 export default function AdminReports() {
   const navigate = useNavigate();
   const { token, setToken } = useContext(UserContext)!;
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
-  
+//   const [startDate, setStartDate] = useState<Date>();
+//   const [endDate, setEndDate] = useState<Date>();
+
   useEffect(() => {
     if (!token) {
       setToken(null);
       navigate("/");
     }
   }, [token]);
-  const onReportDateSelected = () => {
+//   const onReportDateSelected = () => {
     
-  }
+//   }
   return (
     <div>
       <div>reports slection</div>

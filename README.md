@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-# Active User => Email: Admin@admin.com ; Password:Admin123
+# Active User => Email: admin@admin.com ; Password:Admin123
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

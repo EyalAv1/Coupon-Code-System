@@ -74,3 +74,24 @@ export const deleteCouponById = async (couponId: number) => {
     return null;
   }
 };
+
+export const updateCouponUsageCount = async (newCoupon: Coupon) => {
+  try {
+    const patchDoc = newCoupon;
+    patchDoc.UsageCount += 1;
+    const response = await fetch(api + `updateUsageCount/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(patchDoc),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to update coupon usage count${response.status}`);
+    }
+    return response.json();
+  } catch (err: any) {
+    toast.warning(err);
+    return null;
+  }
+};

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./CouponsValidator.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -14,13 +14,9 @@ import CouponCart from "../cart/CouponCart";
 export default function CouponsValidatoer() {
   const [couponCode, setCouponCode] = useState<string>("");
   const [couponsDiscount, setCouponsDiscount] = useState<number>(100);
-  const [validateCoupons, setValidateCoupons] = useState<Array<string>>([]);
+  const [validateCoupons, setValidateCoupons] = useState<Array<Coupon>>([]);
   const [isCouponDoublePromotionExist, setIsCouponDoublePromotionExist] =
     useState<boolean>(false);
-  useEffect(() => {
-    let string = JSON.stringify([...validateCoupons]);
-    localStorage.setItem("couponCart", string);
-  }, [validateCoupons]);
   const onCouponValidate = () => {
     getCouponByName(couponCode)
       .then((res) => {
@@ -32,13 +28,13 @@ export default function CouponsValidatoer() {
           validateCoupons.length,
           coupon
         );
-        if (!validateCoupons.includes(coupon.Code)) {
+        if (!validateCoupons.includes(coupon)) {
           if (!isCouponDoublePromotionExist) {
             if (couponValidationStatus == CouponValidationStatus.Valid) {
               // const discount: number = coupon.DiscountAmount;
               // setCouponsDiscount(couponsDiscount * (1 - discount! / 100));
               calculateDiscount(coupon);
-              setValidateCoupons([...validateCoupons, couponCode]);
+              setValidateCoupons([...validateCoupons, coupon]);
               if (!coupon.AllowDoublePromotion) {
                 setIsCouponDoublePromotionExist(true);
               }
@@ -117,11 +113,6 @@ export default function CouponsValidatoer() {
           Add Coupon
         </Button>
       </form>
-      {validateCoupons
-        ? validateCoupons.map((c) => {
-            return <div key={c}>{c}</div>;
-          })
-        : null}
       <CouponCart coupons={validateCoupons} totalPrice={couponsDiscount} />
     </div>
   );

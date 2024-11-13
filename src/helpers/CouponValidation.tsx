@@ -14,8 +14,6 @@ export const isCouponValid = (
   if (coupon.ExpirationDate != undefined) {
     const expieryDate = getReadbaleDate(coupon.ExpirationDate);
     const currentDate = new Date();
-    console.log("current Date: ", currentDate);
-    console.log("coupon expoery date:", expieryDate);
     if (expieryDate < currentDate) {
       return CouponValidationStatus.Expiered;
     }
@@ -34,8 +32,7 @@ export const isCouponValid = (
   return CouponValidationStatus.Valid;
 };
 
-const getReadbaleDate = (rawDate: Date) => {
-  console.log("rawdate:", rawDate);
+export const getReadbaleDate = (rawDate: Date) => {
   const date = rawDate.toString().split("-");
   const dateDay = parseInt(date[date.length - 1].split("T")[0]);
   const validDate = new Date();

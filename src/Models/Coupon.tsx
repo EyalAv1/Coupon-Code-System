@@ -11,3 +11,8 @@ export type Coupon = {
   UsageCount: number;
   UserId: number;
 };
+
+export type UserCouponCardType = {
+  couponCode: string;
+  couponValidationDate: Date;
+}

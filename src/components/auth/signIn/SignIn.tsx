@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import { loginUser } from "../../../services/AuthService";
 import { UserContext } from "../../../Context/userContext";
 
-export default function SignIn() {
+interface SetSignInMethod {
+  setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SignIn({ setIsSignIn }: SetSignInMethod) {
   const navigate = useNavigate();
 
   const { setToken } = useContext(UserContext)!;
@@ -48,6 +52,10 @@ export default function SignIn() {
           placeholder="Password"
         />
         <button onClick={(e) => onLoginClicked(e)}>Login</button>
+        <label>
+          You still don't have an account yet?
+          <button onClick={() => setIsSignIn(false)}> Click to sign up!</button>
+        </label>
       </form>
     </div>
   );

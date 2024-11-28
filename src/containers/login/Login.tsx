@@ -8,7 +8,7 @@ export default function Login() {
 
   return (
     <div>
-      <button
+      {/* <button
         onClick={() => {
           setIsSignIn(true);
         }}
@@ -21,8 +21,12 @@ export default function Login() {
         }}
       >
         Sing Up
-      </button>
-      {isSignIn ? <SignIn/> : <SignUp />}
+      </button> */}
+      {isSignIn ? (
+        <SignIn setIsSignIn={setIsSignIn} />
+      ) : (
+        <SignUp setIsSignIn={setIsSignIn} />
+      )}
     </div>
   );
 }

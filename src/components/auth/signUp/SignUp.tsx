@@ -8,7 +8,11 @@ import {
   validatePassword,
 } from "../../../helpers/FormValidation";
 
-export default function SignUp() {
+interface SetSignupMethod {
+  setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SignUp({setIsSignIn} : SetSignupMethod) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -80,6 +84,10 @@ export default function SignUp() {
           placeholder="Password"
         />
         <button onClick={(e) => onClickHandler(e)}>Sign Up</button>
+        <label>
+          Do you have an account?
+          <button onClick={() => setIsSignIn(true)}> Click to sign in!</button>
+        </label>
       </form>
     </div>
   );
